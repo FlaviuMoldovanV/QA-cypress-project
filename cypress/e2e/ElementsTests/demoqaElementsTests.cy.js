@@ -1,4 +1,4 @@
-import { TextBox } from "./demoqaPOM";
+import { TextBox } from "../../POM/demoqaPOM";
 /// <reference types= "cypress" />
 
 describe("DEMOQA Elements Testing ", () => {
@@ -8,17 +8,11 @@ describe("DEMOQA Elements Testing ", () => {
     cy.get(".card-up").first().click();
   });
 
-  before(() => {
-    cy.fixture('formData').as('formData');
-  });
-
   it("Text Box", () => {
     cy.get(".element-group #item-0").first().click();
     cy.url().should("include", "/text-box");
-    cy.get('@formData').then((formData) => {
-      let textBox = new TextBox();
-      textBox.contactForm_Completion(formData);
-    }); 
+    let textBox = new TextBox();
+    textBox.contactForm_Completion(); 
   });
 
   it.skip("Check Box", () => {});
