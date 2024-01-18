@@ -11,3 +11,18 @@ export class TextBox{
     }
 }
 
+export class CheckBox{
+
+    clickRandomOfficeFile(){
+    let random = Math.floor(Math.random() * 4);
+    cy.get(".rct-collapse").click();
+    cy.get('label[for="tree-node-documents"]').prev().click();
+    cy.get('label[for="tree-node-office"]').prev().click();
+    cy.get(".rct-node-leaf").eq(random).as("officeFile").click(); // Chooses one of the four options available
+
+    cy.get("@officeFile").invoke("text").then((selectedText) => {
+        cy.get("#result").should("contain",`You have selected :${selectedText.toLowerCase()}`);
+      });
+    }
+}
+
