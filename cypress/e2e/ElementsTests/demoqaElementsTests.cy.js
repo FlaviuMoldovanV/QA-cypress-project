@@ -1,4 +1,4 @@
-import { TextBox,CheckBox } from "../../POM/demoqaPOM";
+import { TextBox,CheckBox,RadioButton } from "../../POM/demoqaPOM";
 /// <reference types= "cypress" />
 
 describe("DEMOQA Elements Testing ", () => {
@@ -10,7 +10,7 @@ describe("DEMOQA Elements Testing ", () => {
   it("Text Box", () => {
     cy.get(".element-group #item-0").first().click();
     let textBox = new TextBox();
-    textBox.contactForm_Completion();
+    textBox.fillContactForm();
     cy.get('.border').should('exist');
   });
 
@@ -20,7 +20,11 @@ describe("DEMOQA Elements Testing ", () => {
     checkBox.clickRandomOfficeFile();
   });
 
-  it.skip("Radio Button", () => {});
+  it("Radio Button", () => {
+    cy.get(".element-group #item-2").first().click();
+    let radioButton = new RadioButton();
+    radioButton.pressBothButtons();
+  });
 
   it.skip("Web Tables", () => {});
 
