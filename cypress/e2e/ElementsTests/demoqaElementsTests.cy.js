@@ -1,4 +1,4 @@
-import { TextBox,CheckBox,RadioButton } from "../../POM/demoqaPOM";
+import { TextBox, CheckBox, RadioButton, WebTables } from "../../POM/demoqaPOM";
 /// <reference types= "cypress" />
 
 describe("DEMOQA Elements Testing ", () => {
@@ -11,7 +11,7 @@ describe("DEMOQA Elements Testing ", () => {
     cy.get(".element-group #item-0").first().click();
     let textBox = new TextBox();
     textBox.fillContactForm();
-    cy.get('.border').should('exist');
+    cy.get(".border").should("exist");
   });
 
   it("Check Box", () => {
@@ -26,7 +26,18 @@ describe("DEMOQA Elements Testing ", () => {
     radioButton.pressBothButtons();
   });
 
-  it.skip("Web Tables", () => {});
+  it("Web Tables", () => {
+    cy.get(".element-group #item-3").first().click();
+    let webTables = new WebTables();
+    webTables.addPerson();
+    webTables.addPerson();
+    webTables.addPerson();
+
+    // You can type only : First Name,Last Name,Age,Email,Salary,Department
+    webTables.simulateSearch('Email');
+
+    webTables.deleteLastPerson();
+  });
 
   it.skip("Buttons", () => {});
 });
