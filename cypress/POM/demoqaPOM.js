@@ -31,9 +31,9 @@ export class CheckBox {
 
 export class RadioButton {
   pressBothButtons() {
-    cy.get(".custom-radio").eq(0).click();
+    cy.get('label[for="yesRadio"]').click();
     cy.get(".mt-3").should("contain", "You have selected Yes");
-    cy.get(".custom-radio").eq(1).click();
+    cy.get('label[for="impressiveRadio"]').click();
     cy.get(".mt-3").should("contain", "You have selected Impressive");
   }
 }
@@ -65,7 +65,7 @@ export class WebTables {
     cy.get(".rt-resizable-header-content")
       .not(':contains("Action")')
       .each(($el, index) => {
-    // Check if the text of the current header element matches the user input
+        // Check if the text of the current header element matches the user input
         if ($el.text() === columnName) {
           columnIndex = index;
           return false;
@@ -74,7 +74,9 @@ export class WebTables {
       .then(() => {
         // Throw an error if columnName is not one of the 6 choices allowed
         if (columnIndex === undefined) {
-          throw new Error(`Column "${columnName}" not found. Please check if it's one of the 6 available columns.`);
+          throw new Error(
+            `Column "${columnName}" not found. Please check if it's one of the 6 available columns.`
+          );
         }
         let columnData = [];
 
@@ -96,5 +98,26 @@ export class WebTables {
 
   deleteLastPerson() {
     cy.get('[title="Delete"]').last().click();
+  }
+}
+
+export class Buttons {
+  clickButtons() {
+    cy.get("#doubleClickBtn").dblclick();
+    cy.get("#doubleClickMessage").should(
+      "contain",
+      "You have done a double click"
+    );
+    cy.get("#rightClickBtn").rightclick();
+    cy.get("#rightClickMessage").should(
+      "contain",
+      "You have done a right click"
+    );
+    //The button's ID changes every time
+    cy.get(".btn-primary").eq(2).click();
+    cy.get("#dynamicClickMessage").should(
+      "contain",
+      "You have done a dynamic click"
+    );
   }
 }
