@@ -7,6 +7,10 @@ import {
 } from "../../POM/demoqaPOM";
 /// <reference types= "cypress" />
 
+function GenerateRandomNumber() {
+  return Math.floor(Math.random() * 10 + 1);
+}
+
 describe("DEMOQA Elements Testing ", () => {
   beforeEach(() => {
     cy.visit("https://demoqa.com");
@@ -35,14 +39,18 @@ describe("DEMOQA Elements Testing ", () => {
   it("Web Tables", () => {
     cy.get(".element-group #item-3").first().click();
     let webTables = new WebTables();
-    webTables.addPerson();
-    webTables.addPerson();
-    webTables.addPerson();
+    let randomNumber = GenerateRandomNumber();
+
+    for (let i = 0; i < randomNumber; i++) {
+      webTables.addPerson();
+    }
 
     // You can type only : First Name,Last Name,Age,Email,Salary,Department
     webTables.simulateSearch("Email");
 
-    webTables.deleteLastPerson();
+    for (let i = 0; i < randomNumber; i++) {
+      webTables.deleteLastPerson();
+    }
   });
 
   it("Buttons", () => {
