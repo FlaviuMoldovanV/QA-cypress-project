@@ -1,5 +1,14 @@
 import { faker } from "@faker-js/faker";
 
+/**
+ * @summary Fills out a contact form with random data.
+ * @example
+ * const textBox = new TextBox();
+ * textBox.fillContactForm();
+ * @description
+ * It uses the faker.js library to generate random input data,
+ * ensuring a wide range of possibilities for data input.
+ */
 export class TextBox {
   fillContactForm() {
     cy.get("#userName").type(faker.person.fullName());
@@ -10,6 +19,16 @@ export class TextBox {
   }
 }
 
+/**
+ * @summary Automates selection of a random 'Office' file checkbox after navigating through the categories.
+ * @example
+ * const checkBox = new CheckBox();
+ * checkBox.clickRandomOfficeFile();
+ * @description
+ * It usesCypress to automate checkbox interactions by dynamically expanding folders and selecting a random file.
+ * Verification of the selection is achieved by checking the application's response for the selected file's name,
+ * thereby enhancing test coverage through varied user interaction simulations.
+ */
 export class CheckBox {
   clickRandomOfficeFile() {
     let random = Math.floor(Math.random() * 4);
@@ -29,6 +48,16 @@ export class CheckBox {
   }
 }
 
+/**
+ * @summary Automates the process of selecting 'Yes' and 'Impressive' radio buttons.
+ * @example
+ * const radioButton = new RadioButton();
+ * radioButton.pressBothButtons();
+ * @description
+ * Selects 'Yes' and 'Impressive' radio buttons,
+ * ensuring each selection is accurately recognized by the web application.
+ */
+
 export class RadioButton {
   pressBothButtons() {
     cy.get('label[for="yesRadio"]').click();
@@ -38,7 +67,24 @@ export class RadioButton {
   }
 }
 
+/**
+ * @summary Utilises Cypress to automate actions such as adding, deleting, and searching within web tables,
+ * ensuring data manipulation is accurately reflected in the web application.
+ * @example
+ * const webTables = new WebTables();
+ * // Adding a person to the table
+ * webTables.addPerson();
+ * // Simulating a search within the table
+ * webTables.simulateSearch("Email");
+ * // Deleting the last person from the table
+ * webTables.deleteLastPerson();
+ * @description
+ * This class provides methods to interact with web tables through Cypress,
+ * facilitating the automation of adding and deleting entries, as well as simulating searches.
+ * @param {string} columnName - The name of the column to search through.
+ */
 export class WebTables {
+  //Adds a person to the web table with randomly generated data.
   addPerson() {
     cy.get(".rt-tbody .rt-tr").not(".-padRow").its("length").as("initialCount");
 
@@ -59,6 +105,7 @@ export class WebTables {
     });
   }
 
+  //Simulates a search action in the web table using a specified column name.
   simulateSearch(columnName) {
     let columnIndex;
     // Select all header elements that do not contain 'Action' text
@@ -101,6 +148,17 @@ export class WebTables {
   }
 }
 
+/**
+ * @summary Provides methods to perform actions like double click, right click, and dynamic click on buttons,
+ * facilitating verification of each action's effect on the web application.
+ * @example
+ * const buttons = new Buttons();
+ * buttons.clickButtons(); // Executes double click, right click, and dynamic click actions.
+ * @description
+ * Automates interactions with button elements by executing predefined actions (double click, right click, and dynamic click),
+ * ensuring each action is properly executed and acknowledged by the web application.
+ * It enhances the robustness of automated UI tests by verifying the application's response to these interactions.
+ */
 export class Buttons {
   clickButtons() {
     cy.get("#doubleClickBtn").dblclick();
