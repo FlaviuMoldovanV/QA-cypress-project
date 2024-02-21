@@ -42,5 +42,11 @@ describe("DEMOQA Elements Testing 6-9", () => {
     });
   });
 
-  it.skip("Dynamic Properties", () => {});
+  it("Wait for 5 seconds before checking for element changes", () => {
+    cy.get(".element-group #item-8").first().click();
+
+    cy.get('#enableAfter',{ timeout: 5000 }).should('be.enabled');
+    cy.get('#colorChange',{ timeout: 5000 }).should('have.class', 'text-danger');
+    cy.get('#visibleAfter',{ timeout: 5000 }).should('be.visible');
+  });
 });
